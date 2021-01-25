@@ -5,12 +5,12 @@ const KnexSessionStore = require("connect-session-knex")(session);
 const usersRouter = require("./users/users-router.js");
 
 const server = express();
-
 server.use(express.json());
+
 server.use(
   session({
-    name: "monkey",
-    secret: "keep it secret, keep it safe!",
+    name: "shrek",
+    secret: "secret secret, I got a secret",
     cookie: {
       maxAge: 1000 * 60 * 60,
       secure: false,
@@ -18,14 +18,6 @@ server.use(
     },
     resave: false,
     saveUninitialized: false,
-
-    store: new KnexSessionStore({
-      knex: require("../database/dbConfig.js"),
-      tablename: "sessions",
-      sidfieldname: "sid",
-      createtable: true,
-      clearInterval: 1000 * 60 * 60,
-    }),
   })
 );
 

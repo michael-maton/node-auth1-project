@@ -30,15 +30,15 @@ router.post("/register", (req, res) => {
 router.post("/login", async (req, res) => {
     const { username, password } = req.body;
     try {
-      const checkingUser = await User.findBy({ username }).first();
+      const checkingUser = await Users.findBy({ username }).first();
       if (checkingUser && bcrypt.compareSync(password, checkingUser.password)) {
         req.session.user = checkingUser;
-        res.json("Logged in");
+        res.json("welcome back");
       } else {
-        res.status(401).json("Invalid credentials");
+        res.status(401).json("invalid credentials");
       }
     } catch {
-      res.status(500).json("You shall not pass!");
+      res.status(500).json(err.message);
     }
   });
 
